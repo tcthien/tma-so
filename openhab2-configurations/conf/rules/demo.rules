@@ -1,0 +1,15 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+
+
+/**
+ * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands 
+ * and posting an updated state on the bus 
+*/ 
+rule "Light 1"
+	when
+		Item gLab2_Utah_light1 received command
+	then
+		postUpdate(gLab2_Utah_light1, gLab2_Utah_light1.state);
+end

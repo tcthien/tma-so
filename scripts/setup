@@ -1,0 +1,84 @@
+#!/bin/bash
+
+function displayHelp()
+{
+    echo "Syntax: setup <u|r>u(Ubuntu) | r(Raspbian)"
+    echo "            - u: Ubuntu environment"
+    echo "            - r: Raspbian environment"
+    exit
+}
+
+function buildDocker()
+{
+    local scriptDir=${TMA_SO_HOME}/sources/scripts
+    local buildDir=${scriptDir}/${1}
+    echo "Build Dir Is: ${buildDir}"
+    cd ${buildDir}
+    
+    # Step1.1: Download OpenHab ------------------------------------------------------------------------------
+    echo "Prepare content for Openhab2 docker -----------------------------------------------------"
+    cd ${buildDir}/docker-openhab
+    if [ ! -f "./openhab-offline-2.0.0-SNAPSHOT.zip" ]; then
+        echo 'This is fresh system so downloading Openhab2 from internet'
+        wget https://openhab.ci.cloudbees.com/job/openHAB-Distribution/lastSuccessfulBuild/artifact/distributions/openhab-offline/target/openhab-offline-2.0.0-SNAPSHOT.zip
+    fi
+    # Step1.2: Extract openhab
+    if [ ! -d "./openhab-offline-2.0.0-SNAPSHOT" ]; then
+        unzip openhab-offline-2.0.0-SNAPSHOT.zip -d openhab-offline-2.0.0-SNAPSHOT
+        chmod 777 openhab-offline-2.0.0-SNAPSHOT
+    fi
+    
+    # Step2: Moving configuration to source folder -----------------------------------------------------------
+    if [ ! -d "${TMA_SO_HOME}/sources/openhab2-configurations" ]; then
+            # This folder will be moved to dockerdatadir in dockerRunOpenhab2 script
+            mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations
+            mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations/addons ${TMA_SO_HOME}/sources/openhab2-configurations/runtime ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc
+            
+            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/conf ${TMA_SO_HOME}/sources/openhab2-configurations/
+            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/userdata ${TMA_SO_HOME}/sources/openhab2-configurations/
+            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc/
+            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/karaf/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc/
+            
+            echo 'Moving OpenHab2''s configuration outside container so it will be used in Docker''s volume'
+        fi
+    cd ${buildDir}
+    
+    echo "Setup environment for docker build ------------------------------------------------------"
+    cd ${scriptDir}
+    ./dockerRunMQTT ${1} setup
+    ./dockerRunOpenhab2 ${1} setup
+}
+
+function entryPoint()
+{
+    if [ "$1" == "u" ]; then
+        buildDocker "ubuntu"
+    elif [ "$1" == "ubuntu" ]; then
+        buildDocker "ubuntu"
+    elif [ "$1" == "r" ]; then
+        buildDocker "raspbian"
+    elif [ "$1" == "raspbian" ]; then
+        buildDocker "raspbian"
+    elif [ "$1" == "-h" ]; then
+        displayHelp
+    else
+        displayHelp
+    fi
+}
+
+
+if [ -z "${TMA_SO_HOME}" ]; then
+    echo "Please set ENV Variable TMA_SO_HOME pointing to TMA_SO repository"
+    exit
+fi
+if [ -z "${TMA_SO_TARGET_OS}" ]; then
+    echo "Please set ENV Variable TMA_SO_TARGET_OS=<ubuntu | raspbian>"
+    exit
+fi
+
+ARG1=""
+if [ -z "${1}" ]; then
+    ARG1=${TMA_SO_TARGET_OS}
+fi
+
+entryPoint "${ARG1}"

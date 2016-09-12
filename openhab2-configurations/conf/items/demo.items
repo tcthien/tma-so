@@ -1,0 +1,14 @@
+Group All
+Group gLab2		(All)
+Group gLab2_Utah 	"Utah Room" 	<video> 	(gLab2)
+
+/* All Active Groups*/
+Group:Switch:OR(ON, OFF) 		gLab2_Lights 		"All Lab2's Lights [(%d)]" 						(All)
+
+/* Lights */
+Switch gLab2_Utah_light1 	"Light 1" 		(gLab2_Utah,gLab2_Lights) {mqtt="<[tmaso:tma/lab2/utah/light1/hw2sw:command:ON:1],<[tmaso:tma/lab2/utah/light1/hw2sw:command:OFF:0],>[tmaso:tma/lab2/utah/light1/sw2hw:command:ON:1],>[tmaso:tma/lab2/utah/light1/sw2hw:command:OFF:0]"}
+Switch gLab2_Utah_light2  	"Light 2" 		(gLab2_Utah, gLab2_Lights) {mqtt="<[tmaso:tma/lab2/utah/light2/hw2sw:command:ON:1],<[tmaso:tma/lab2/utah/light2/hw2sw:command:OFF:0],>[tmaso:tma/lab2/utah/light2/sw2hw:command:ON:1],>[tmaso:tma/lab2/utah/light2/sw2hw:command:OFF:0]"}
+Switch gLab2_Utah_light3 	"Light 3" 		(gLab2_Utah, gLab2_Lights) {mqtt="<[tmaso:tma/lab2/utah/light3/hw2sw:command:ON:1],<[tmaso:tma/lab2/utah/light3/hw2sw:command:OFF:0],>[tmaso:tma/lab2/utah/light3/sw2hw:command:ON:1],>[tmaso:tma/lab2/utah/light3/sw2hw:command:OFF:0]"}
+
+
+

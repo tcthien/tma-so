@@ -1,0 +1,48 @@
+sitemap demo label="TMA Smart Office"
+{
+	Frame label="Lab 2" {
+		Text label="Utah Room" icon="groundfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="First Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="Second Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="Third Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+	}
+	
+	Frame label="Lab 3" {
+		Text label="Ground Floor" icon="groundfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="First Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="Second Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+		Text label="Third Floor" icon="firstfloor" {
+			Switch item=gLab2_Utah_light1
+			Switch item=gLab2_Utah_light2
+			Switch item=gLab2_Utah_light3
+		}
+	}
+}

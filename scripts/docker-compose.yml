@@ -1,0 +1,30 @@
+version: '2'
+services:
+  openhab:
+    build: ./${TMA_SO_TARGET_OS}/docker-openhab
+    ports:
+     - "8080:8080"
+     - "8443:8443"
+    volumes:
+     - ${TMA_SO_HOME}/dockerdatadir/openhab2/conf:/usr/openhab-2.0/conf
+     - ${TMA_SO_HOME}/dockerdatadir/openhab2/addons:/usr/openhab-2.0/addons
+     - ${TMA_SO_HOME}/dockerdatadir/openhab2/userdata:/usr/openhab-2.0/userdata
+     - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/etc:/usr/openhab-2.0/runtime/etc
+     - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/karaf/etc:/usr/openhab-2.0/runtime/karaf/etc
+    depends_on:
+     - mqtt
+     - tmasoadvweb
+  mqtt:
+    build: ./${TMA_SO_TARGET_OS}/docker-mosquitto
+    ports:
+     - "1883:1883"
+     - "9001:9001"
+    volumes:
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/config:/mqtt/config:ro
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/log:/mqtt/log
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/data/:/mqtt/data/
+  tmasoadvweb:
+    build: ./${TMA_SO_TARGET_OS}/docker-tmasoAdvWeb
+    ports:
+     - "9090:8080"
+     - "9443:8443"
