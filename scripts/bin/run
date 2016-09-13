@@ -75,11 +75,11 @@ export TMA_SO_TARGET_OS
 
 # Process action
 if [ "$3" == "all" ]; then
-    runAll ${DOCKER_COMPOSE_ACTION}
+    runAll "${DOCKER_COMPOSE_ACTION}"
 elif [ "$3" == "openhab2" ]; then
-    runOpenhab2 ${DOCKER_COMPOSE_ACTION}
+    runOpenhab2 "${DOCKER_COMPOSE_ACTION}"
 elif [ "$3" == "mqtt" ]; then
-    runMQTT ${DOCKER_COMPOSE_ACTION}
+    runMQTT "${DOCKER_COMPOSE_ACTION}"
 else
     displayHelp
     exit
