@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "0.0.9"
+echo "TMA Smart Office - 0.0.9"
