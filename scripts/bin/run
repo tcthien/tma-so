@@ -2,7 +2,7 @@
 
 function displayHelp()
 {
-    echo "Syntax: run <start|stop|remove|build> <u|r> <all|openhab2|mqtt>"
+    echo "Syntax: run <start|stop|remove|build|status> <u|r> <all|openhab2|mqtt>"
     echo "                      - u: Ubuntu environment"
     echo "                      - r: Raspbian environment"
     exit
@@ -50,6 +50,8 @@ elif [ "$1" == "remove" ]; then
     DOCKER_COMPOSE_ACTION="echo 'y' | docker-compose rm"
 elif [ "$1" == "build" ]; then
     DOCKER_COMPOSE_ACTION="docker-compose build"
+elif [ "$1" == "status" ]; then
+    DOCKER_COMPOSE_ACTION="docker-compose ps"
 else
     displayHelp
     exit
