@@ -67,11 +67,6 @@ if [ -z "${TMA_SO_HOME}" ]; then
     exit
 fi
 
-if [ -z "${TMA_SO_TARGET_OS}" ]; then
-    echo "Please set ENV Variable TMA_SO_TARGET_OS=<ubuntu | raspbian>"
-    exit
-fi
-
 ARG1=""
 ARG2=""
 if [ ! -z "${2}" ]; then
@@ -80,6 +75,10 @@ if [ ! -z "${2}" ]; then
 fi
 
 if [ -z "${1}" ]; then
+    if [ -z "${TMA_SO_TARGET_OS}" ]; then
+        echo "Please set ENV Variable TMA_SO_TARGET_OS=<ubuntu | raspbian>"
+        exit
+    fi
     ARG1=${TMA_SO_TARGET_OS}
 else
     ARG1=${1}

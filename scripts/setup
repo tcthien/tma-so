@@ -71,12 +71,8 @@ if [ -z "${TMA_SO_HOME}" ]; then
     echo "Please set ENV Variable TMA_SO_HOME pointing to TMA_SO repository"
     exit
 fi
-if [ -z "${TMA_SO_TARGET_OS}" ]; then
-    echo "Please set ENV Variable TMA_SO_TARGET_OS=<ubuntu | raspbian>"
-    exit
-fi
 
-ARG1=""
+ARG1=${1}
 if [ -z "${1}" ]; then
     ARG1=${TMA_SO_TARGET_OS}
 fi
