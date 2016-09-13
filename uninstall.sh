@@ -8,5 +8,5 @@ fi
 export TMA_SO_HOME=~/tma-so-software/
 export TMA_SO_TARGET_OS=$1
 
-rm -rf ~/${TMA_SO_HOME}
+rm -rf ${TMA_SO_HOME}
 
