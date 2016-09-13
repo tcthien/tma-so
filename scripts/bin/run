@@ -1,0 +1,83 @@
+#!/bin/bash
+
+function displayHelp()
+{
+    echo "Syntax: run <start|stop|remove|build> <u|r> <all|openhab2|mqtt>"
+    echo "                      - u: Ubuntu environment"
+    echo "                      - r: Raspbian environment"
+    exit
+}
+
+function runAll() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runAll
+    ${1}
+}
+
+function runMQTT() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runMQTT
+    ${1}
+}
+
+function runOpenhab2() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runOpenhab2
+    ${1}
+}
+
+# Check & force user to input 3 parameters -------------------------------------
+if [ -z "${1}" ]; then
+    displayHelp
+    exit
+fi
+if [ -z "${2}" ]; then
+    displayHelp
+    exit
+fi
+if [ -z "${3}" ]; then
+    displayHelp
+    exit
+fi
+
+DOCKER_COMPOSE_ACTION=""
+# Get Action
+if [ "$1" == "start" ]; then
+    DOCKER_COMPOSE_ACTION="docker-compose up -d"
+elif [ "$1" == "stop" ]; then
+    DOCKER_COMPOSE_ACTION="docker-compose stop"
+elif [ "$1" == "remove" ]; then
+    DOCKER_COMPOSE_ACTION="echo 'y' | docker-compose rm"
+elif [ "$1" == "build" ]; then
+    DOCKER_COMPOSE_ACTION="docker-compose build"
+else
+    displayHelp
+    exit
+fi
+
+
+# Get Target OS info
+if [ "$2" == "u" ]; then
+    TMA_SO_TARGET_OS="ubuntu"
+elif [ "$2" == "ubuntu" ]; then
+    TMA_SO_TARGET_OS="ubuntu"
+elif [ "$2" == "r" ]; then
+    TMA_SO_TARGET_OS="raspbian"
+elif [ "$2" == "raspbian" ]; then
+    TMA_SO_TARGET_OS="raspbian"
+else
+    displayHelp
+    exit
+fi
+
+export TMA_SO_HOME=~/tma-so-software/
+export TMA_SO_TARGET_OS
+
+# Process action
+if [ "$3" == "all" ]; then
+    runAll ${DOCKER_COMPOSE_ACTION}
+elif [ "$3" == "openhab2" ]; then
+    runOpenhab2 ${DOCKER_COMPOSE_ACTION}
+elif [ "$3" == "mqtt" ]; then
+    runMQTT ${DOCKER_COMPOSE_ACTION}
+else
+    displayHelp
+    exit
+fi
