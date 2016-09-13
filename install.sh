@@ -11,6 +11,11 @@ export TMA_SO_TARGET_OS=$1
 mkdir ${TMA_SO_HOME}
 chmod 777 ~/tma-so-software
 cd ${TMA_SO_HOME}
+
+if [ -d "${TMA_SO_HOME}/sources" ]; then
+    rm -rf ${TMA_SO_HOME}/sources
+fi
+
 git clone https://github.com/tcthien/tma-so sources
 cd ${TMA_SO_HOME}/sources/scripts
 
