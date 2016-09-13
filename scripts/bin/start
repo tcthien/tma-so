@@ -1,0 +1,60 @@
+#!/bin/bash
+
+function displayHelp()
+{
+    echo "Syntax: start <u|r> <all|openhab2|mqtt>"
+    echo "                      - u: Ubuntu environment"
+    echo "                      - r: Raspbian environment"
+    exit
+}
+
+function runAll() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runAll
+    docker-compose up --build -d
+}
+
+function runMQTT() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runMQTT
+    docker-compose up --build -d
+}
+
+function runOpenhab2() {
+    cd ${TMA_SO_HOME}/sources/scripts/bin/runOpenhab2
+    docker-compose up --build -d
+}
+
+if [ -z "${1}" ]; then
+    displayHelp
+    exit
+fi
+if [ -z "${2}" ]; then
+    displayHelp
+    exit
+fi
+
+if [ "$1" == "u" ]; then
+    TMA_SO_TARGET_OS="ubuntu"
+elif [ "$1" == "ubuntu" ]; then
+    TMA_SO_TARGET_OS="ubuntu"
+elif [ "$1" == "r" ]; then
+    TMA_SO_TARGET_OS="raspbian"
+elif [ "$1" == "raspbian" ]; then
+    TMA_SO_TARGET_OS="raspbian"
+else
+    displayHelp
+    exit
+fi
+
+export TMA_SO_HOME=~/tma-so-software/
+export TMA_SO_TARGET_OS
+
+if [ "$2" == "all" ]; then
+    runAll
+elif [ "$2" == "openhab2" ]; then
+    runOpenhab2
+elif [ "$2" == "mqtt" ]; then
+    runMQTT
+else
+    displayHelp
+    exit
+fi

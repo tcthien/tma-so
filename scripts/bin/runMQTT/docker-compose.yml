@@ -1,0 +1,11 @@
+version: '2'
+services:
+  mqtt:
+    build: ${TMA_SO_HOME}/sources/scripts/${TMA_SO_TARGET_OS}/docker-mosquitto
+    ports:
+     - "1883:1883"
+     - "9001:9001"
+    volumes:
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/config:/mqtt/config:ro
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/log:/mqtt/log
+     - ${TMA_SO_HOME}/dockerdatadir/mqtt/data/:/mqtt/data/
