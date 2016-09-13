@@ -10,16 +10,19 @@ function displayHelp()
 
 function runAll() {
     cd ${TMA_SO_HOME}/sources/scripts/bin/runAll
+    echo "Execute Command: ${1}"
     ${1}
 }
 
 function runMQTT() {
     cd ${TMA_SO_HOME}/sources/scripts/bin/runMQTT
+    echo "Execute Command: ${1}"
     ${1}
 }
 
 function runOpenhab2() {
     cd ${TMA_SO_HOME}/sources/scripts/bin/runOpenhab2
+    echo "Execute Command: ${1}"
     ${1}
 }
 
