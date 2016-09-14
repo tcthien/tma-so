@@ -11,4 +11,4 @@ services:
      - ${TMA_SO_HOME}/dockerdatadir/openhab2/userdata:/usr/openhab-2.0/userdata
      - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/etc:/usr/openhab-2.0/runtime/etc
      - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/karaf/etc:/usr/openhab-2.0/runtime/karaf/etc
-    depends_on:
+
