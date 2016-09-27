@@ -15,5 +15,5 @@ WORKDIR ${APPDIR}
 # Expose volume with configuration and userdata dir
 VOLUME ${APPDIR}/conf ${APPDIR}/addons ${APPDIR}/userdata ${APPDIR}/runtime/etc ${APPDIR}/runtime/karaf/etc 
 EXPOSE 8080 8443
-CMD ${APPDIR}/start.sh
+ENTRYPOINT ${APPDIR}/start.sh
 

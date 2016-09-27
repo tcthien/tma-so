@@ -56,7 +56,7 @@ DOCKER_COMPOSE_ACTION=""
 DOCKER_RM=""
 # Get Action
 if [ "$1" == "start" ]; then
-    DOCKER_COMPOSE_ACTION="docker-compose up -d"
+    DOCKER_COMPOSE_ACTION="docker-compose up"
 elif [ "$1" == "stop" ]; then
     DOCKER_COMPOSE_ACTION="docker-compose stop"
 elif [ "$1" == "remove" ]; then
@@ -86,8 +86,6 @@ else
     exit
 fi
 
-export TMA_SO_HOME=~/tma-so-software/
-export TMA_SO_TARGET_OS
 
 # Process action
 if [ "$3" == "all" ]; then

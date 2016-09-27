@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./scripts/bin/run start u mqtt
+${TMA_SO_HOME}/sources/scripts/bin/run start u mqtt
 

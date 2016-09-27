@@ -6,9 +6,9 @@ services:
      - "8080:8080"
      - "8443:8443"
     volumes:
-     - ${TMA_SO_HOME}/dockerdatadir/openhab2/conf:/usr/openhab-2.0/conf
-     - ${TMA_SO_HOME}/dockerdatadir/openhab2/addons:/usr/openhab-2.0/addons
-     - ${TMA_SO_HOME}/dockerdatadir/openhab2/userdata:/usr/openhab-2.0/userdata
-     - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/etc:/usr/openhab-2.0/runtime/etc
-     - ${TMA_SO_HOME}/dockerdatadir/openhab2/runtime/karaf/etc:/usr/openhab-2.0/runtime/karaf/etc
+     - ${TMA_SO_OPENHAB_CONFIG}/conf:/usr/openhab-2.0/conf
+     - ${TMA_SO_OPENHAB_CONFIG}/addons:/usr/openhab-2.0/addons
+     - ${TMA_SO_OPENHAB_CONFIG}/userdata:/usr/openhab-2.0/userdata
+     - ${TMA_SO_OPENHAB_CONFIG}/runtime/etc:/usr/openhab-2.0/runtime/etc
+     - ${TMA_SO_OPENHAB_CONFIG}/runtime/karaf/etc:/usr/openhab-2.0/runtime/karaf/etc
 

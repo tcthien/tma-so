@@ -1,4 +1,4 @@
 #!/bin/bash
-sudo rm -rf ~/tma-so-software/
+sudo rm -rf ${TMA_SO_HOME}
 sudo rm -rf ~/tmp/tma-so
 

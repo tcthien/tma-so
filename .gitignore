@@ -1,0 +1,4 @@
+openhab2-configurations/userdata/tmp/
+openhab2-configurations/userdata/lock
+scripts/ubuntu/docker-openhab/openhab-offline-2.0.0-SNAPSHOT*
+openhab2-configurations/userdata

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./scripts/bin/run stop u openhab2
+${TMA_SO_HOME}/sources/scripts/bin/run stop u openhab2

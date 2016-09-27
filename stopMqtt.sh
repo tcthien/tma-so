@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./scripts/bin/run stop u mqtt
+${TMA_SO_HOME}/sources/scripts/bin/run stop u mqtt

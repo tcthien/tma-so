@@ -34,6 +34,7 @@ function buildDocker()
             mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations
             mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations/addons ${TMA_SO_HOME}/sources/openhab2-configurations/runtime ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc
             
+            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/addons ${TMA_SO_HOME}/sources/openhab2-configurations/
             cp -rf ./openhab-offline-2.0.0-SNAPSHOT/conf ${TMA_SO_HOME}/sources/openhab2-configurations/
             cp -rf ./openhab-offline-2.0.0-SNAPSHOT/userdata ${TMA_SO_HOME}/sources/openhab2-configurations/
             cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc/
