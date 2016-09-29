@@ -1,5 +1,5 @@
-CLOSED=closed
-OPEN=open
-NULL=unknown
-ON=open
-OFF=closed
+CLOSED=Closed
+OPEN=Open
+NULL=Unknown
+SAFE=Safe
+UNSAFE=Unsafe

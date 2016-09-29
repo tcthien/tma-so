@@ -1,0 +1,17 @@
+var Boolean enableSecurity = false
+
+rule "Enable Security Rule"
+	when
+		Item Sec_Security changed
+	then
+		if(Sec_Security.state == ON) {
+    		enableSecurity = true;
+    		// Demo only
+    		postUpdate(Sec_Gas, "SAFE");
+		} else if(Sec_Security.state == OFF) {
+			enableSecurity = false;
+			// Demo only
+			postUpdate(Sec_Gas, "UNSAFE");
+		}
+end
+
