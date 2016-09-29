@@ -1,5 +1,9 @@
 sitemap demo label="Main Menu"
 {
+	Frame label="Demo" {
+		Switch item=Tmp_CarSensor
+	}
+	
 	Frame label="Environment Monitor" {
 		Text item=Env_Temperature_Inside valuecolor=[Env_Temperature_Inside>29="red",>25="green",>15="blue",>5="orange",<=5="blue"]
 		Text item=Env_Temperature_Outside valuecolor=[Env_Temperature_Inside=="NULL"="lightgray",Env_Temperature_Outside>29="red",>25="green",>15="blue",>5="orange",<=5="blue"]

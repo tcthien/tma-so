@@ -20,3 +20,6 @@ Group  RC
 Switch RC_GarageLight   		"Garage Light"			<light>	(RC)
 Switch RC_LivingRoomLight   	"Living Room Light"		<light>	(RC)	
 Switch RC_BedroomLight 			"Bed Room Light"		<light>	(RC)
+
+
+Switch Tmp_CarSensor 			"Car Sensor"		(RC) {channel = "tmaso:status:ultrasonicUid:default"}
