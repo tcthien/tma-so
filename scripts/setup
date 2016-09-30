@@ -30,19 +30,29 @@ function buildDocker()
     
     # Step2: Moving configuration to source folder -----------------------------------------------------------
     if [ ! -d "${TMA_SO_HOME}/sources/openhab2-configurations" ]; then
-            # This folder will be moved to dockerdatadir in dockerRunOpenhab2 script
-            mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations
-            mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations/addons ${TMA_SO_HOME}/sources/openhab2-configurations/runtime ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc
-            
-            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/addons ${TMA_SO_HOME}/sources/openhab2-configurations/
-            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/conf ${TMA_SO_HOME}/sources/openhab2-configurations/
-            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/userdata ${TMA_SO_HOME}/sources/openhab2-configurations/
-            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc/
-            cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/karaf/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc/
-            
-            echo 'Moving OpenHab2''s configuration outside container so it will be used in Docker''s volume'
-        fi
-    cd ${buildDir}
+        # This folder will be moved to dockerdatadir in dockerRunOpenhab2 script
+        mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations
+        mkdir -m 777 ${TMA_SO_HOME}/sources/openhab2-configurations/addons ${TMA_SO_HOME}/sources/openhab2-configurations/runtime ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc
+        
+        cp -rf ./openhab-offline-2.0.0-SNAPSHOT/addons ${TMA_SO_HOME}/sources/openhab2-configurations/
+        cp -rf ./openhab-offline-2.0.0-SNAPSHOT/conf ${TMA_SO_HOME}/sources/openhab2-configurations/
+        cp -rf ./openhab-offline-2.0.0-SNAPSHOT/userdata ${TMA_SO_HOME}/sources/openhab2-configurations/
+        cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/etc/
+        cp -rf ./openhab-offline-2.0.0-SNAPSHOT/runtime/karaf/etc/* ${TMA_SO_HOME}/sources/openhab2-configurations/runtime/karaf/etc/
+        
+        echo 'Moving OpenHab2''s configuration outside container so it will be used in Docker''s volume'
+    fi
+    
+    echo "Setup Mary TTS Server ------------------------------------------------------------------"
+    cd ${scriptDir}
+    if [ ! -f "./marytts-5.2.zip" ]; then
+        wget https://github.com/marytts/marytts/releases/download/v5.2/marytts-5.2.zip
+    fi
+    if [ ! -d "./marytts-5.2" ]; then
+        unzip marytts-5.2.zip
+        chmod 777 marytts-5.2
+    fi
+    
     
     echo "Setup environment for docker build ------------------------------------------------------"
     cd ${scriptDir}
