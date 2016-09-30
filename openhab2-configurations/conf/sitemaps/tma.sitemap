@@ -1,27 +1,34 @@
 sitemap demo label="Main Menu"
 {
 	Frame label="Demo" {
-		Switch item=Tmp_CarSensor
+		Switch item=Garage_CarStatus
+		Switch item=Garage_GasStatus
+		Switch item=Living_DoorContact
+		Switch item=Living_DoorRFID
+		Text   item=Lcd_Display
+		Switch item=Living_PIRSensor
+		Switch item=Bed_PIRSensor
+		Switch item=TestSoilMoisture
 	}
 	
 	Frame label="Environment Monitor" {
-		Text item=Env_Temperature_Inside valuecolor=[Env_Temperature_Inside>29="red",>25="green",>15="blue",>5="orange",<=5="blue"]
-		Text item=Env_Temperature_Outside valuecolor=[Env_Temperature_Inside=="NULL"="lightgray",Env_Temperature_Outside>29="red",>25="green",>15="blue",>5="orange",<=5="blue"]
-		Text item=Env_Humidity valuecolor=[Env_Humidity=="NULL"="lightgray",Env_Humidity>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"]
-		Text item=Env_Moisture_Humidity valuecolor=[Env_Humidity=="NULL"="lightgray",Env_Humidity>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"]
+		Text item=Living_Temperature_Inside 	valuecolor=[Living_Temperature_Inside	>28="red",>25="green",>5="blue",<=5="lightgray"]
+		Text item=Env_Temperature_Outside 		valuecolor=[Env_Temperature_Outside		>28="red",>25="green",>5="blue",<=5="lightgray"]
+		Text item=Living_Humidity 				valuecolor=[Living_Humidity			>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"]
+		Text item=Env_Moisture_Humidity 		valuecolor=[Env_Moisture_Humidity	>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"]
 	}
 	
 	Frame label="Security Monitor" {
-		Switch item=Sec_Security
-		Text item=Sec_Gas
-		Text item=Sec_Front_Door
-		Text item=Sec_Garage_Door
+		Switch item=Living_Security
+		Text item=Garage_GasStatus_label		valuecolor=[Garage_GasStatus_label	"Gas detected! DANGER"="red","Gas undetected! SAFE"="green"]
+		Text item=Living_DoorContact_label		valuecolor=[Living_FrontDoor_label	"OPEN"="orange","CLOSED"="purple"]
+		Text item=Garage_CarStatus_label		valuecolor=[Garage_CarStatus_label	"Your Car Went Away"="red","Your Car Still There"="blue"]
 	}
 	
 	Frame label="Remote Control" {
-		Switch item=RC_GarageLight
-		Switch item=RC_LivingRoomLight
-		Switch item=RC_BedroomLight
+		Switch item=Garage_Light
+		Switch item=Living_Light
+		Switch item=Bed_Light
 	}
 }
 

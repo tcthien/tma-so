@@ -1,25 +1,33 @@
-// vim: syntax=Xtend syntax=openhab
-// TMA SO code
-DateTime Weather_LastUpdate     "Last Update [%1$ta %1$tR]"     <clock>
-// Environment --------------------------------------------------------
-Group 	Env       		"Weather"       <sun>
-Number 	Env_Temperature_Inside      "Inside Temperature [%.1f °C]" <temperature> (Env, Env_Temperature_Inside_Chart) { channel="tmaso:value:tempUid:default" }
-Number 	Env_Temperature_Outside     "Outside Temperature [%.1f °C]" <temperature> (Env, Env) { channel="yahooweather:weather:berlin:temperature" }
-Number	Env_Humidity				"Environment Moisture [%.1f %%]"	<humidity>	(Env_Weather)  { channel="tmaso:value:humiUid:default" }
-Number	Env_Moisture_Humidity		"Soil Moisture [%.1f %%]"	<grass>	(Env_Weather)
-// --------------------------------------------------------------------
+// Garage -------------------------------------------------------------------------
+Group 	Garage
+Switch 	Garage_Light   			"Garage Light"			<light>				(Garage)
+Switch	Garage_GasStatus 		"Gas Status"  			<gas>      			(Garage)
+String	Garage_GasStatus_label	"Gas Status [%s]"		<gas>      			(Garage)
+Switch  Garage_CarStatus  		"Car Status"			<garage> 			(Garage)	
+String  Garage_CarStatus_label  "Car Status [%s]"		<garage> 			(Garage)
 
-// Security -----------------------------------------------------------
-Group 	Sec
-Switch 	Sec_Security  		"Security Status"  					<present>     		(Sec)
-String	Sec_Gas     		"Gas Status [MAP(en.map):%s]"  		<gas>      			(Sec)
-Contact	Sec_Front_Door  	"Front Door [MAP(en.map):%s]"		<frontdoor>			(Sec) {channel = "tmaso:door:door-uid:status"}
-Contact Sec_Garage_Door  	"Car Status [MAP(en.map):%s]"		<garage> 			(Sec)
-// --------------------------------------------------------------------
-Group  RC
-Switch RC_GarageLight   		"Garage Light"			<light>	(RC)
-Switch RC_LivingRoomLight   	"Living Room Light"		<light>	(RC)	
-Switch RC_BedroomLight 			"Bed Room Light"		<light>	(RC)
+// Living Room --------------------------------------------------------------------
+Group 	Living
+Switch 	Living_Light 	  			"Living Room Light"					<light>				(Living)
+Switch	Living_DoorContact 			"Front Door"						<frontdoor>			(Living)
+String	Living_DoorContact_label 	"Front Door [%s]"					<frontdoor>			(Living) 	
+Switch	Living_DoorRFID		 		"RFID Locker"	
+Number 	Living_Temperature_Inside   "Inside Temperature [%.1f °C]" 		<temperature> 		(Living) 	
+Number	Living_Humidity				"Environment Moisture [%.1f %%]"	<humidity>			(Living)	
+Switch 	Living_Security  			"Security Status"  					<present>     		(Living)
+Switch	Living_PIRSensor		 	"Living - PIR Sensor"
+
+// Bed Room -----------------------------------------------------------------------
+Group 	Bed
+Switch	Bed_Light				 	"Bed Room Light"					<light>				(Bed)
+Switch	Bed_PIRSensor			 	"Bed - PIR Sensor"
+
+// Garden -------------------------------------------------------------------------
+Number	Env_Moisture_Humidity		"Soil Moisture [%.1f %%]"			<grass>				(Env_Weather)
+Number 	Env_Temperature_Outside     "Outside Temperature [%.1f °C]"		<temperature> 		(Env, Env) { channel="yahooweather:weather:berlin:temperature" }
 
 
-Switch Tmp_CarSensor 			"Car Sensor"		(RC) {channel = "tmaso:status:ultrasonicUid:default"}
+
+// TEST, can be removed
+String	Lcd_Display			"LCD [%s]"
+Switch	TestSoilMoisture		"Test Soil Moisture"

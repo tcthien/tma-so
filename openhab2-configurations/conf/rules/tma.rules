@@ -1,17 +1,113 @@
 var Boolean enableSecurity = false
 
-rule "Enable Security Rule"
+// Garage Rules ----------------------------------------------------------------------------------------------
+rule "Car Status"
 	when
-		Item Sec_Security changed
+		Item Garage_CarStatus changed
 	then
-		if(Sec_Security.state == ON) {
-    		enableSecurity = true;
-    		// Demo only
-    		postUpdate(Sec_Gas, "SAFE");
-		} else if(Sec_Security.state == OFF) {
-			enableSecurity = false;
-			// Demo only
-			postUpdate(Sec_Gas, "UNSAFE");
+		if(Garage_CarStatus.state == ON) {
+    		postUpdate(Garage_CarStatus_label, "Your Car Still There");
+		} else if(Garage_CarStatus.state == OFF) {
+			postUpdate(Garage_CarStatus_label, "Your Car Went Away");
+			sendXMPP("thientran1986@xmpp.zone", "WARN! Your Car Went Away");
 		}
 end
 
+rule "Gas Status"
+	when
+		Item Garage_GasStatus changed
+	then
+		if(Garage_GasStatus.state == ON) {
+    		postUpdate(Garage_GasStatus_label, "Gas detected! DANGER");
+		} else if(Garage_GasStatus.state == OFF) {
+			postUpdate(Garage_GasStatus_label, "Gas undetected! SAFE");
+		}
+end
+// End Garage Rules ------------------------------------------------------------------------------------------
+
+
+
+// Front Door Rules ------------------------------------------------------------------------------------------
+rule "Front Door Status"
+	when
+		Item Living_DoorContact changed
+	then
+		if(Living_DoorContact.state == ON) {
+    		postUpdate(Living_DoorContact_label, "OPEN");
+		} else if(Living_DoorContact.state == OFF) {
+			postUpdate(Living_DoorContact_label, "CLOSED");
+		}
+end
+
+rule "Door RFID"
+	when
+		Item Living_DoorRFID changed
+	then
+		if(Living_DoorRFID.state == ON) {
+			// send MQTT to update LCD
+			postUpdate(Lcd_Display, "RFID - Valid Access");
+		} else if(Living_DoorRFID.state == OFF) {
+			// send MQTT to update LCD
+			postUpdate(Lcd_Display, "RFID - Invalid Access");
+		}
+end
+// End Front Door Rules --------------------------------------------------------------------------------------
+
+
+
+// Security Rules ----------------------------------------------------------------------------------------------
+rule "Enable Security Rule"
+	when
+		Item Living_Security changed
+	then
+		if(Living_Security.state == ON) {
+			// send MQTT to update LCD
+			postUpdate(Lcd_Display, "Enabled Security");
+			enableSecurity = true;
+		} else if(Living_Security.state == OFF) {
+			// send MQTT to update LCD
+			postUpdate(Lcd_Display, "Disable Security");
+			enableSecurity = false;
+		}
+end
+rule "PIR Sensor detects moving"
+	when
+		Item Living_PIRSensor changed or Item Bed_PIRSensor changed 
+	then
+		if((Living_PIRSensor.state == ON || Bed_PIRSensor.state == ON  ) && enableSecurity) {
+			// if pirState = ON (moving detected) & security is enabled => raised alarm
+			// send MQTT to update LCD
+			postUpdate(Lcd_Display, "Theft is visiting your home!");
+			// Raising buzzer alarm
+			// Send XMPP msg
+			sendXMPP("thientran1986@xmpp.zone", "DANGER! Theft is visiting your home!");
+		}
+end
+// End define Security Rules -----------------------------------------------------------------------------------
+
+
+
+// Garden Rules ------------------------------------------------------------------------------------------------
+rule "Soil mosture got low"
+	when
+		Item Env_Moisture_Humidity changed
+	then
+		if(Env_Moisture_Humidity.state <= 50) {
+    		postUpdate(Lcd_Display, "Your garden needed water");
+    		sendXMPP("thientran1986@xmpp.zone", "WARN! Your garden needed water");
+		} else if(Env_Moisture_Humidity.state > 50) {
+			postUpdate(Lcd_Display, "Your garden got full water");
+			sendXMPP("thientran1986@xmpp.zone", "Your garden got full water");
+		}
+end
+rule "Test Soil Moisture"
+	when
+		Item TestSoilMoisture changed
+	then
+		if(TestSoilMoisture.state == ON) {
+			postUpdate(Env_Moisture_Humidity, 40);
+		} else if(TestSoilMoisture.state == OFF) {
+			postUpdate(Env_Moisture_Humidity, 60);
+		}
+end
+// End Garden Rules --------------------------------------------------------------------------------------------
