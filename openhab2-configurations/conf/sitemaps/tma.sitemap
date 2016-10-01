@@ -1,16 +1,21 @@
 sitemap demo label="Main Menu"
 {
+	/*
 	Frame label="Demo" {
 		Switch item=Garage_CarStatus
 		Switch item=Garage_GasStatus
 		Switch item=Living_DoorContact
 		Switch item=Living_DoorRFID
 		Text   item=Lcd_Display
-		Switch item=Living_PIRSensor
+		
 		Switch item=Bed_PIRSensor
 		Switch item=TestSoilMoisture
 	}
-	
+	*/
+	Frame label="Demo" {
+		Switch item=Bed_PIRSensor
+		Switch item=Garage_Bell
+	}
 	Frame label="Environment Monitor" {
 		Text item=Living_Temperature_Inside 	valuecolor=[Living_Temperature_Inside	>28="red",>25="green",>5="blue",<=5="lightgray"]
 		Text item=Env_Temperature_Outside 		valuecolor=[Env_Temperature_Outside		>28="red",>25="green",>5="blue",<=5="lightgray"]
@@ -26,9 +31,9 @@ sitemap demo label="Main Menu"
 	}
 	
 	Frame label="Remote Control" {
-		Switch item=Garage_Light
-		Switch item=Living_Light
-		Switch item=Bed_Light
+		Switch item=Garage_Light	label="Garage Light"
+		Switch item=Living_Light	label="Living Room Light"
+		Switch item=Bed_Light		label="Bed Room Light"
 	}
 }
 

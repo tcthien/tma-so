@@ -1,33 +1,37 @@
 // Garage -------------------------------------------------------------------------
 Group 	Garage
-Switch 	Garage_Light   			"Garage Light"			<light>				(Garage)
+Switch 	Garage_Light   			"Garage Light"			<light>				(Garage)  {channel="tmaso:light:light1Uid:default"} 
+Switch 	Garage_LightSwitch		"Garage Light Switch"								  {channel="tmaso:switch:switchD0Uid:default"}
 Switch	Garage_GasStatus 		"Gas Status"  			<gas>      			(Garage)
 String	Garage_GasStatus_label	"Gas Status [%s]"		<gas>      			(Garage)
 Switch  Garage_CarStatus  		"Car Status"			<garage> 			(Garage)	
 String  Garage_CarStatus_label  "Car Status [%s]"		<garage> 			(Garage)
+Switch 	Garage_Bell				"Bell"								  				  {channel="tmaso:alarm:bellUid:buzzer"}
 
 // Living Room --------------------------------------------------------------------
 Group 	Living
-Switch 	Living_Light 	  			"Living Room Light"					<light>				(Living)
+Switch 	Living_Light 	  			"Living Room Light"					<light>				(Living)  {channel="tmaso:light:light2Uid:default"} 
+Switch 	Living_LightSwitch			"Living Light Switch"											  {channel="tmaso:switch:switchD1Uid:default"}
 Switch	Living_DoorContact 			"Front Door"						<frontdoor>			(Living)
 String	Living_DoorContact_label 	"Front Door [%s]"					<frontdoor>			(Living) 	
 Switch	Living_DoorRFID		 		"RFID Locker"	
 Number 	Living_Temperature_Inside   "Inside Temperature [%.1f °C]" 		<temperature> 		(Living) 	
 Number	Living_Humidity				"Environment Moisture [%.1f %%]"	<humidity>			(Living)	
 Switch 	Living_Security  			"Security Status"  					<present>     		(Living)
-Switch	Living_PIRSensor		 	"Living - PIR Sensor"
+Switch	Living_PIRSensor		 	"Living - PIR Sensor"												
 
 // Bed Room -----------------------------------------------------------------------
 Group 	Bed
-Switch	Bed_Light				 	"Bed Room Light"					<light>				(Bed)
-Switch	Bed_PIRSensor			 	"Bed - PIR Sensor"
+Switch	Bed_Light				 	"Bed Room Light"					<light>				(Bed)  {channel="tmaso:light:light3Uid:default"} 
+Switch 	Bed_LightSwitch				"Bed Light Switch"											   {channel="tmaso:switch:switchD2Uid:default"}
+Switch	Bed_PIRSensor			 	"Bed - PIR Sensor"											   {channel="tmaso:status:pir2Uid:default"}
 
 // Garden -------------------------------------------------------------------------
-Number	Env_Moisture_Humidity		"Soil Moisture [%.1f %%]"			<grass>				(Env_Weather)
+Switch	Env_Moisture_Humidity		"Soil Moisture [%.1f %%]"			<grass>				(Env_Weather)
 Number 	Env_Temperature_Outside     "Outside Temperature [%.1f °C]"		<temperature> 		(Env, Env) { channel="yahooweather:weather:berlin:temperature" }
 
 
 
 // TEST, can be removed
-String	Lcd_Display			"LCD [%s]"
+String	Lcd_Display			"LCD [%s]"					//{channel="tmaso:lcd:lcdUid:line1"}
 Switch	TestSoilMoisture		"Test Soil Moisture"
