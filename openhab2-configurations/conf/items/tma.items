@@ -12,9 +12,9 @@ Switch 	Garage_Bell				"Bell"								  				  {channel="tmaso:alarm:bellUid:buzze
 Group 	Living
 Switch 	Living_Light 	  			"Living Room Light"					<light>				(Living)  {channel="tmaso:light:light2Uid:default"} 
 Switch 	Living_LightSwitch			"Living Light Switch"											  {channel="tmaso:switch:switchD1Uid:default"}
-Switch	Living_DoorContact 			"Front Door"						<frontdoor>			(Living)
+Switch	Living_DoorContact 			"Front Door"						<frontdoor>			(Living)  {channel="tmaso:contact:doorUid:default"}
 String	Living_DoorContact_label 	"Front Door [%s]"					<frontdoor>			(Living) 	
-Switch	Living_DoorRFID		 		"RFID Locker"	
+Switch	Living_DoorRFID		 		"RFID Locker"													  {channel="tmaso:rfid:rfidUid:default"}
 Number 	Living_Temperature_Inside   "Inside Temperature [%.1f °C]" 		<temperature> 		(Living) 	
 Number	Living_Humidity				"Environment Moisture [%.1f %%]"	<humidity>			(Living)	
 Switch 	Living_Security  			"Security Status"  					<present>     		(Living)

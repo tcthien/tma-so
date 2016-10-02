@@ -11,11 +11,11 @@ sitemap demo label="Main Menu"
 		Switch item=Bed_PIRSensor
 		Switch item=TestSoilMoisture
 	}
-	*/
+	
 	Frame label="Demo" {
 		Switch item=Bed_PIRSensor
 		Switch item=Garage_Bell
-	}
+	}*/
 	Frame label="Environment Monitor" {
 		Text item=Living_Temperature_Inside 	valuecolor=[Living_Temperature_Inside	>28="red",>25="green",>5="blue",<=5="lightgray"]
 		Text item=Env_Temperature_Outside 		valuecolor=[Env_Temperature_Outside		>28="red",>25="green",>5="blue",<=5="lightgray"]
