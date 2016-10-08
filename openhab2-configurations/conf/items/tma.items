@@ -1,7 +1,7 @@
 // Garage -------------------------------------------------------------------------
 Group 	Garage
 Switch 	Garage_Light   			"Garage Light"			<light>				(Garage)  {channel="tmaso:light:light1Uid:default"} 
-Switch 	Garage_LightSwitch		"Garage Light Switch"								  {channel="tmaso:switch:switchD0Uid:default"}
+//Switch 	Garage_LightSwitch		"Garage Light Switch"								  {channel="tmaso:switch:switchD0Uid:default"}
 Switch	Garage_GasStatus 		"Gas Status"  			<gas>      			(Garage)  {channel="tmaso:status:gasUid:default"}
 String	Garage_GasStatus_label	"Gas Status [%s]"		<gas>      			(Garage)
 Switch  Garage_CarStatus  		"Car Status"			<garage> 			(Garage)	
@@ -12,7 +12,7 @@ Switch 	Garage_Bell				"Bell"					<alarm>		  				  {channel="tmaso:alarm:bellUid
 // Living Room --------------------------------------------------------------------
 Group 	Living
 Switch 	Living_Light 	  			"Living Room Light"					<light>				(Living)  {channel="tmaso:light:light2Uid:default"} 
-Switch 	Living_LightSwitch			"Living Light Switch"											  {channel="tmaso:switch:switchD1Uid:default"}
+//Switch 	Living_LightSwitch			"Living Light Switch"											  {channel="tmaso:switch:switchD1Uid:default"}
 Switch	Living_DoorContact 			"Front Door"						<frontdoor>			(Living)  {channel="tmaso:status:doorUid:default"}
 String	Living_DoorContact_label 	"Front Door [%s]"					<frontdoor>			(Living) 	
 Switch	Living_DoorRFID		 		"RFID Locker"													  {channel="tmaso:rfid:rfidUid:default"}
@@ -24,7 +24,7 @@ Switch	Living_PIRSensor		 	"Living - PIR Sensor"											  {channel="tmaso:sta
 // Bed Room -----------------------------------------------------------------------
 Group 	Bed
 Switch	Bed_Light				 	"Bed Room Light"					<light>				(Bed)  {channel="tmaso:light:light3Uid:default"} 
-Switch 	Bed_LightSwitch				"Bed Light Switch"											   {channel="tmaso:switch:switchD2Uid:default"}
+//Switch 	Bed_LightSwitch				"Bed Light Switch"											   {channel="tmaso:switch:switchD2Uid:default"}
 Switch	Bed_PIRSensor			 	"Bed - PIR Sensor"											   {channel="tmaso:status:pir2Uid:default"}
 
 // Garden -------------------------------------------------------------------------

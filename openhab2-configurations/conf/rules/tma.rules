@@ -5,20 +5,11 @@
 
 var Boolean enableSecurity = false
 var Boolean authenticatedRFID = false
-<<<<<<< HEAD
-<<<<<<< HEAD
 var Boolean enableXMPP = false 
 var String xmppTo = "thientran1986@xmpp.zone"
-=======
-var Boolean useMaryTTS = true
-var Boolean useXMPP = true
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-=======
-var Boolean useMaryTTS = true
-var Boolean useXMPP = true
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 
 // Light Rules ----------------------------------------------------------------------------------------------
+/*
 rule "Garage Light Rule"
 	when
 		Item Garage_Light changed
@@ -79,6 +70,7 @@ rule "Bedroom Light Switch Rule"
 			sendCommand(Bed_Light, OFF);
 		}
 end
+ */
 // End Light Rules ------------------------------------------------------------------------------------------
 
 // Garage Rules ----------------------------------------------------------------------------------------------
@@ -90,29 +82,12 @@ rule "Car Status"
     		postUpdate(Garage_CarStatus_label, "Your Car Still There");
 		} else if(Garage_CarStatus.state == OFF) {
 			postUpdate(Garage_CarStatus_label, "Your Car Went Away");
-<<<<<<< HEAD
-<<<<<<< HEAD
 			// ALARM: Notify to mobile phone
 			if(enableXMPP) {
 				sendXMPP(xmppTo, "WARN! Your Car Went Away");
 			}
 			// Bell 
 			sendCommand(Garage_Bell, ON);
-=======
-=======
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-			// Notify to mobile phone
-            if(useXMPP){
-                sendXMPP("thientran1986@xmpp.zone", "WARN! Your Car Went Away");
-            }
-			// Bell 
-			sendCommand(Garage_Bell, ON);
-			
-			// MaryTTS talk: Your car went away. Poor you.
-			if(useMaryTTS){
-				playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Your%20car%20went%20away.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE")
-			}
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 		}
 end
 
@@ -125,17 +100,8 @@ rule "Gas Status"
     		postUpdate(Garage_GasStatus_label, "DANGER! Gas detected.");
     		// ALARM: Bell 
 			sendCommand(Garage_Bell, ON);
-<<<<<<< HEAD
 			if(enableXMPP) {
     			sendXMPP(xmppTo, "DANGER in Garage#! Gas detected");
-=======
-    		// MaryTTS talk: Dangerous. Gas detected in you garage
-    		if(useMaryTTS){
-	    		playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Dangerous.%20Gas%20detected%20in%20you%20garage.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-<<<<<<< HEAD
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-=======
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 			}
 		} else if(Garage_GasStatus.state == OFF) {
 			// ALARM: Bell
@@ -153,9 +119,9 @@ rule "Env_LightStatus Status"
 		Item Env_LightStatus changed
 	then
 		if(Env_LightStatus.state == ON) {
-			sendCommand(Garage_LightSwitch, OFF);
-			sendCommand(Living_LightSwitch, OFF);
-			sendCommand(Bed_LightSwitch, OFF);
+			sendCommand(Garage_Light, OFF);
+			sendCommand(Living_Light, OFF);
+			sendCommand(Bed_Light, OFF);
 		}
 end
 // End Garage Rules ------------------------------------------------------------------------------------------
@@ -173,26 +139,12 @@ rule "Front Door Status"
     			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:BEEP BEEP#line2:Who Are You?")
     			// If don't authenticated & access to front door
     			postUpdate(Lcd_Display, "Invalid Access from Front Door");
-
-                if(useXMPP){
-                    sendXMPP("thientran1986@xmpp.zone", "DANGER! Theft is visiting your home from front door!");
-                }
     			// ALARM: Not authenticated but open the door
     			// Bell 
 				sendCommand(Garage_Bell, ON);
-<<<<<<< HEAD
-<<<<<<< HEAD
 				if(enableXMPP) {
 	    			sendXMPP(xmppTo, "DANGER! Theft is visiting your home from front door!");
 				}
-=======
-=======
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-    			// MaryTTS talk: Someone accessed to your home
-    			if(useMaryTTS){
-	    			playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Someone%20accessed%20to%20your%20home.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-				} 
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
     		}
 		} else if(Living_DoorContact.state == OFF) {
 			postUpdate(Living_DoorContact_label, "CLOSED");
@@ -210,17 +162,9 @@ rule "Door RFID"
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Welcome home#line2:    master!")
 			sendCommand(Lcd_Display, "RFID - Valid Access");
 			authenticatedRFID = true;
-<<<<<<< HEAD
 			sendCommand(Garage_Bell, OFF);
 		}
 		/* else if(Living_DoorRFID.state == OFF) {
-=======
-			// MaryTTS talk: Access granted. Welcome master to the home
-			if(useMaryTTS){
-				playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Access%20granted.%20Welcome%20master%20to%20the%20home.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-			} 
-		} else if(Living_DoorRFID.state == OFF) {
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 			// send MQTT to update LCD
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:BEEP BEEP#line2:Who Are You?")
 			sendCommand(Lcd_Display, "RFID - Invalid Access");
@@ -240,33 +184,18 @@ rule "Enable Security Rule"
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Your Security#line2:    Enabled")
 			postUpdate(Lcd_Display, "Security Enabled");
 			enableSecurity = true;
-<<<<<<< HEAD
-=======
-			// MaryTTS talk: Security has been enabled
-			if(useMaryTTS){
-				playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Security%20has%20been%20enabled.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-			} 
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 		} else if(Living_Security.state == OFF) {
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Your Security#line2:    Disabled")
 			postUpdate(Lcd_Display, "Security Disabled");
 			enableSecurity = false;
 			// Stop buzzer
 			sendCommand(Garage_Bell, OFF);
-<<<<<<< HEAD
-=======
-			// MaryTTS talk: Security has been disabled
-			if(useMaryTTS){
-				playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Security%20has%20been%20disabled.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-			}
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 		}
 end
 rule "PIR Sensor detects moving"
 	when
 		Item Living_PIRSensor changed or Item Bed_PIRSensor changed 
 	then
-<<<<<<< HEAD
 		if(enableSecurity){
 			// Don't enable security => update light
 			if (Bed_PIRSensor.state == ON) {
@@ -291,29 +220,11 @@ rule "PIR Sensor detects moving"
 			if(Env_LightStatus.state == OFF){
 				if (Bed_PIRSensor.state == ON) {
 					sendCommand(Bed_Light, ON);
-					sendCommand(Bed_LightSwitch, ON);
 				} 
 				if (Living_PIRSensor.state == ON) {
 					sendCommand(Living_Light, ON);
-					sendCommand(Living_LightSwitch, ON);
 				} 
 			}
-=======
-		if((Living_PIRSensor.state == ON || Bed_PIRSensor.state == ON  ) && enableSecurity) {
-			// if pirState = ON (moving detected) & security is enabled => raised alarm
-			// send MQTT to update LCD
-			postUpdate(Lcd_Display, "Theft is visiting your home!");
-			// Raising buzzer alarm
-			// WARN: Bell 
-			sendCommand(Garage_Bell, ON);
-			// Send XMPP msg
-            if(useXMPP){
-                sendXMPP("thientran1986@xmpp.zone", "DANGER! Theft is visiting your home!");
-            }
-		} else if(Bed_PIRSensor.state == ON && !enableSecurity) {
-			sendCommand(Bed_Light, ON);
-			sendCommand(Bed_LightSwitch, ON);
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 		}
 end
 // End define Security Rules -----------------------------------------------------------------------------------
@@ -328,8 +239,6 @@ rule "Soil moisture got low"
 		if(Env_Moisture_Humidity.state == ON) {
 			postUpdate(Env_Moisture_Humidity_label, "Needs Water");
     		postUpdate(Lcd_Display, "Your garden needed water");
-<<<<<<< HEAD
-<<<<<<< HEAD
     		if(enableXMPP) {
     			sendXMPP(xmppTo, "WARN! Your garden needs water");
     		}
@@ -338,28 +247,6 @@ rule "Soil moisture got low"
 			postUpdate(Lcd_Display, "Your garden got enough water");
 			if(enableXMPP) {
 				sendXMPP(xmppTo, "Your garden got full water");
-=======
-=======
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-            if(useXMPP){
-                sendXMPP("thientran1986@xmpp.zone", "WARN! Your garden needs water");
-            }
-    		// MaryTTS talk: Your garden needs water
-    		if(useMaryTTS){
-	    		playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Your%20garden%20needs%20water.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-			}
-		} else if(Env_Moisture_Humidity.state == OFF) {
-			postUpdate(Lcd_Display, "Your garden got full water");
-            if(useXMPP){
-                sendXMPP("thientran1986@xmpp.zone", "Your garden got full water");
-            }
-			// MaryTTS talk: Your garden got full water
-			if(useMaryTTS){
-				playStream("http://192.168.100.100:59125/process?INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&INPUT_TEXT=Your%20garden%20got%20full%20water.&OUTPUT_TEXT=&effect_Volume_selected=&effect_Volume_parameters=amount%3A2.0%3B&effect_Volume_default=Default&effect_Volume_help=Help&effect_TractScaler_selected=&effect_TractScaler_parameters=amount%3A1.5%3B&effect_TractScaler_default=Default&effect_TractScaler_help=Help&effect_F0Scale_selected=&effect_F0Scale_parameters=f0Scale%3A2.0%3B&effect_F0Scale_default=Default&effect_F0Scale_help=Help&effect_F0Add_selected=&effect_F0Add_parameters=f0Add%3A50.0%3B&effect_F0Add_default=Default&effect_F0Add_help=Help&effect_Rate_selected=&effect_Rate_parameters=durScale%3A1.5%3B&effect_Rate_default=Default&effect_Rate_help=Help&effect_Robot_selected=&effect_Robot_parameters=amount%3A100.0%3B&effect_Robot_default=Default&effect_Robot_help=Help&effect_Whisper_selected=&effect_Whisper_parameters=amount%3A100.0%3B&effect_Whisper_default=Default&effect_Whisper_help=Help&effect_Stadium_selected=&effect_Stadium_parameters=amount%3A100.0&effect_Stadium_default=Default&effect_Stadium_help=Help&effect_Chorus_selected=&effect_Chorus_parameters=delay1%3A466%3Bamp1%3A0.54%3Bdelay2%3A600%3Bamp2%3A-0.10%3Bdelay3%3A250%3Bamp3%3A0.30&effect_Chorus_default=Default&effect_Chorus_help=Help&effect_FIRFilter_selected=&effect_FIRFilter_parameters=type%3A3%3Bfc1%3A500.0%3Bfc2%3A2000.0&effect_FIRFilter_default=Default&effect_FIRFilter_help=Help&effect_JetPilot_selected=&effect_JetPilot_parameters=&effect_JetPilot_default=Default&effect_JetPilot_help=Help&HELP_TEXT=&exampleTexts=&VOICE_SELECTIONS=cmu-slt-hsmm%20en_US%20female%20hmm&AUDIO_OUT=WAVE_FILE&LOCALE=en_US&VOICE=cmu-slt-hsmm&AUDIO=WAVE_FILE");
-<<<<<<< HEAD
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
-=======
->>>>>>> c58b5edee793bbc85d6c18dc9672c6912e5301d5
 			}
 		}
 end
