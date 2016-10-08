@@ -11,9 +11,10 @@ sitemap demo label="Main Menu"
 		Switch item=Bed_PIRSensor
 		Switch item=TestSoilMoisture
 	}
+	*/
 	Frame label="Demo" {
-		Switch item=Env_LightStatus
-	}*/
+		Switch item=TestMaryTTS
+	}
 	
 	Frame label="Environment Monitor" {
 		Text item=Living_Temperature_Inside 	valuecolor=[Living_Temperature_Inside	>28="red", >25="green", >5="blue", <=5="lightgray"]
@@ -34,6 +35,7 @@ sitemap demo label="Main Menu"
 		Switch item=Living_Light	label="Living Room Light"
 		Switch item=Bed_Light		label="Bed Room Light"
 		Switch item=Garage_Bell		label="Buzzer"
+		Switch item=Control_GoOut	label="Go Out"
 	}
 }
 

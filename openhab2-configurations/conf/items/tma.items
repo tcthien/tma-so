@@ -33,8 +33,11 @@ String	Env_Moisture_Humidity_label	"Garden [%s]"			<grass>			(Env_Weather)
 Number 	Env_Temperature_Outside     "Outside Temperature [%.1f °C]"	<temperature> 	(Env, Env) 	{channel="yahooweather:weather:berlin:temperature" }
 Switch	Env_LightStatus 			"Light Sensor"  			      					  		{channel="tmaso:status:garLSUid:default"}
 
+String	Util_MaryTTS				"Mary TTS"			{channel="tmaso:maryTTS:localMaryTTS:localMaryTTS"}
+Switch	Control_GoOut				"Go Out"
 
 // TEST, can be removed
 String	Lcd_Display			"LCD [%s]"					//{channel="tmaso:lcd:lcdUid:line1"}
-Switch	TestSoilMoisture		"Test Soil Moisture"
+Switch	TestSoilMoisture	"Test Soil Moisture"
+Switch	TestMaryTTS			"Test Mary TTS"
 Switch	TestSwitch			"Test Switch" {channel="tmaso:door:door-uid:status"}

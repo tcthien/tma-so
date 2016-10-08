@@ -5,7 +5,7 @@
 
 var Boolean enableSecurity = false
 var Boolean authenticatedRFID = false
-var Boolean enableXMPP = false 
+var Boolean enableXMPP = true 
 var String xmppTo = "thientran1986@xmpp.zone"
 
 // Light Rules ----------------------------------------------------------------------------------------------
@@ -184,6 +184,10 @@ rule "Enable Security Rule"
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Your Security#line2:    Enabled")
 			postUpdate(Lcd_Display, "Security Enabled");
 			enableSecurity = true;
+			
+			sendCommand(Garage_Light, OFF);
+			sendCommand(Living_Light, OFF);
+			sendCommand(Bed_Light, OFF);
 		} else if(Living_Security.state == OFF) {
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Your Security#line2:    Disabled")
 			postUpdate(Lcd_Display, "Security Disabled");
@@ -217,7 +221,7 @@ rule "PIR Sensor detects moving"
 			
 		} else {
 			// Don't enable security => update light
-			if(Env_LightStatus.state == OFF){
+			if(Env_LightStatus.state == OFF && Control_GoOut.state == OFF){
 				if (Bed_PIRSensor.state == ON) {
 					sendCommand(Bed_Light, ON);
 				} 
@@ -251,3 +255,15 @@ rule "Soil moisture got low"
 		}
 end
 // End Garden Rules --------------------------------------------------------------------------------------------
+
+
+rule "Soil moisture got low"
+	when
+		Item TestMaryTTS changed
+	then
+		if(TestMaryTTS.state == ON) {
+			sendCommand(Util_MaryTTS, "Your garden got full water")
+		} else if(TestMaryTTS.state == OFF) {
+			sendCommand(Util_MaryTTS, "Your garden needs water")
+		}
+end
