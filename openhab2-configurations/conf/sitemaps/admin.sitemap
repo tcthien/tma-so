@@ -1,0 +1,13 @@
+sitemap demo label="Main Menu"
+{
+	Frame label="Tracing" {
+		Switch item=Env_LightStatus
+		Switch item=Control_GoOut
+		Text item=Living_Counter
+		Text item=Bed_Counter
+		Text item=Rfid_Counter
+		Switch item=TestMaryTTS
+	}
+}
+
+// vim: syntax=Xtend syntax=openhab

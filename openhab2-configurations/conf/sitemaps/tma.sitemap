@@ -11,10 +11,17 @@ sitemap demo label="Main Menu"
 		Switch item=Bed_PIRSensor
 		Switch item=TestSoilMoisture
 	}
+	
 	*/
 	Frame label="Demo" {
 		Switch item=TestMaryTTS
+		Switch item=Env_LightStatus
+		Switch item=Control_GoOut
+		Text item=Living_Counter
+		Text item=Bed_Counter
+		Text item=Rfid_Counter
 	}
+	
 	
 	Frame label="Environment Monitor" {
 		Text item=Living_Temperature_Inside 	valuecolor=[Living_Temperature_Inside	>28="red", >25="green", >5="blue", <=5="lightgray"]
@@ -27,7 +34,7 @@ sitemap demo label="Main Menu"
 		Switch item=Living_Security
 		Text item=Garage_GasStatus_label		valuecolor=[Garage_GasStatus_label	"DANGER! Gas detected."="red","SAFE! Gas undetected"="green"]
 		Text item=Living_DoorContact_label		valuecolor=[Living_FrontDoor_label	"OPEN"="orange","CLOSED"="purple"]
-		Text item=Garage_CarStatus_label		valuecolor=[Garage_CarStatus_label	"Your Car Went Away"="red","Your Car Still There"="blue"]
+//		Text item=Garage_CarStatus_label		valuecolor=[Garage_CarStatus_label	"Your Car Went Away"="red","Your Car Still There"="blue"]
 	}
 	
 	Frame label="Remote Control" {

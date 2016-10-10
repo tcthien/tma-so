@@ -36,8 +36,13 @@ Switch	Env_LightStatus 			"Light Sensor"  			      					  		{channel="tmaso:stat
 String	Util_MaryTTS				"Mary TTS"			{channel="tmaso:maryTTS:localMaryTTS:localMaryTTS"}
 Switch	Control_GoOut				"Go Out"
 
+
 // TEST, can be removed
 String	Lcd_Display			"LCD [%s]"					//{channel="tmaso:lcd:lcdUid:line1"}
 Switch	TestSoilMoisture	"Test Soil Moisture"
 Switch	TestMaryTTS			"Test Mary TTS"
 Switch	TestSwitch			"Test Switch" {channel="tmaso:door:door-uid:status"}
+
+String	Living_Counter				"Living Room Counter [%s]"
+String	Bed_Counter					"Bed Room Counter [%s]"
+String	Rfid_Counter				"Rfid Counter [%s]"

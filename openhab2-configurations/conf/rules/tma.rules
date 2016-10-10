@@ -8,6 +8,64 @@ var Boolean authenticatedRFID = false
 var Boolean enableXMPP = true 
 var String xmppTo = "thientran1986@xmpp.zone"
 
+var livingCounter = 0
+var bedCounter = 0
+var rfidCounter = 0
+
+ // increase the counter at midnight
+rule "Increase counter"
+when
+    Time cron "* * * * * ?"
+then
+	if(rfidCounter > 0){
+	    rfidCounter = rfidCounter + 1
+	}
+	postUpdate(Rfid_Counter, rfidCounter);
+	if(rfidCounter >= 10){
+		authenticatedRFID = false;
+		rfidCounter = 0;
+	}
+	
+//	if(livingCounter > 0){
+//	    livingCounter = livingCounter + 1
+//	}
+//	if(bedCounter > 0){
+//	    bedCounter = bedCounter + 1
+//	}
+//    if(livingCounter >= 10){
+//    	sendCommand(Living_Light, OFF);
+//    	livingCounter = 0;
+//    }
+//    if(bedCounter >= 10){
+//    	sendCommand(Bed_Light, OFF);
+//    	bedCounter = 0;
+//    	sendCommand(Util_MaryTTS, "Good Night")
+//    }
+//    postUpdate(Living_Counter, livingCounter);
+//    postUpdate(Bed_Counter, bedCounter);
+end
+
+rule "Living Room Light Rule"
+	when
+		Item Living_Light changed
+	then
+		if(Living_Light.state == ON) {
+    		livingCounter = 1;
+		} else if(Living_Light.state == OFF) {
+			livingCounter = 0;
+		}
+end
+
+rule "Bedroom Light Rule"
+	when
+		Item Bed_Light changed
+	then
+		if(Bed_Light.state == ON) {
+    		bedCounter = 1;
+		} else if(Bed_Light.state == OFF) {
+			bedCounter = 0;
+		}
+end
 // Light Rules ----------------------------------------------------------------------------------------------
 /*
 rule "Garage Light Rule"
@@ -103,6 +161,7 @@ rule "Gas Status"
 			if(enableXMPP) {
     			sendXMPP(xmppTo, "DANGER in Garage#! Gas detected");
 			}
+			sendCommand(Util_MaryTTS, "DANGER! Gas detected in your garage");
 		} else if(Garage_GasStatus.state == OFF) {
 			// ALARM: Bell
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Garage is safe") 
@@ -145,6 +204,7 @@ rule "Front Door Status"
 				if(enableXMPP) {
 	    			sendXMPP(xmppTo, "DANGER! Theft is visiting your home from front door!");
 				}
+				sendCommand(Util_MaryTTS, "Robber. Who are you");
     		}
 		} else if(Living_DoorContact.state == OFF) {
 			postUpdate(Living_DoorContact_label, "CLOSED");
@@ -163,6 +223,8 @@ rule "Door RFID"
 			sendCommand(Lcd_Display, "RFID - Valid Access");
 			authenticatedRFID = true;
 			sendCommand(Garage_Bell, OFF);
+			sendCommand(Util_MaryTTS, "Welcome to Home");
+			rfidCounter = 1;
 		}
 		/* else if(Living_DoorRFID.state == OFF) {
 			// send MQTT to update LCD
@@ -200,6 +262,12 @@ rule "PIR Sensor detects moving"
 	when
 		Item Living_PIRSensor changed or Item Bed_PIRSensor changed 
 	then
+		if (Living_PIRSensor.state == ON) {
+			livingCounter = 1;
+		}
+		if (Bed_PIRSensor.state == ON) {
+			bedCounter = 1;
+		}
 		if(enableSecurity){
 			// Don't enable security => update light
 			if (Bed_PIRSensor.state == ON) {
@@ -208,7 +276,6 @@ rule "PIR Sensor detects moving"
 				if(enableXMPP) {
 					sendXMPP(xmppTo, "DANGER! Someone in your bed room!");
 				}
-			
 			} 
 			if (Living_PIRSensor.state == ON) {
 				publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Someone in#line2:your living room")
@@ -224,10 +291,14 @@ rule "PIR Sensor detects moving"
 			if(Env_LightStatus.state == OFF && Control_GoOut.state == OFF){
 				if (Bed_PIRSensor.state == ON) {
 					sendCommand(Bed_Light, ON);
+				} else{
+					sendCommand(Bed_Light, OFF);
 				} 
 				if (Living_PIRSensor.state == ON) {
 					sendCommand(Living_Light, ON);
-				} 
+				} else {
+					sendCommand(Living_Light, OFF);
+				}
 			}
 		}
 end
@@ -257,7 +328,7 @@ end
 // End Garden Rules --------------------------------------------------------------------------------------------
 
 
-rule "Soil moisture got low"
+rule "Test Mary TTS"
 	when
 		Item TestMaryTTS changed
 	then
