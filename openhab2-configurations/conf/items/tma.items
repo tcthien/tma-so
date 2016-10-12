@@ -46,3 +46,4 @@ Switch	TestSwitch			"Test Switch" {channel="tmaso:door:door-uid:status"}
 String	Living_Counter				"Living Room Counter [%s]"
 String	Bed_Counter					"Bed Room Counter [%s]"
 String	Rfid_Counter				"Rfid Counter [%s]"
+Switch	EnableMaryTTS				"Virtual Assistant"

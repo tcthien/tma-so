@@ -5,7 +5,8 @@
 
 var Boolean enableSecurity = false
 var Boolean authenticatedRFID = false
-var Boolean enableXMPP = true 
+var Boolean enableXMPP = true
+var Boolean enableMaryTTS = true 
 var String xmppTo = "thientran1986@xmpp.zone"
 
 var livingCounter = 0
@@ -161,7 +162,9 @@ rule "Gas Status"
 			if(enableXMPP) {
     			sendXMPP(xmppTo, "DANGER in Garage#! Gas detected");
 			}
-			sendCommand(Util_MaryTTS, "DANGER! Gas detected in your garage");
+			if(enableMaryTTS){
+				sendCommand(Util_MaryTTS, "DANGER! Gas detected in your garage");
+			}
 		} else if(Garage_GasStatus.state == OFF) {
 			// ALARM: Bell
 			publish("tmaso", "/tma/lcd", "set;lcdUid;line1:Garage is safe") 
@@ -204,7 +207,9 @@ rule "Front Door Status"
 				if(enableXMPP) {
 	    			sendXMPP(xmppTo, "DANGER! Theft is visiting your home from front door!");
 				}
-				sendCommand(Util_MaryTTS, "Robber. Who are you");
+				if(enableMaryTTS){
+					sendCommand(Util_MaryTTS, "Robber. Who are you");
+				}
     		}
 		} else if(Living_DoorContact.state == OFF) {
 			postUpdate(Living_DoorContact_label, "CLOSED");
@@ -223,7 +228,9 @@ rule "Door RFID"
 			sendCommand(Lcd_Display, "RFID - Valid Access");
 			authenticatedRFID = true;
 			sendCommand(Garage_Bell, OFF);
-			sendCommand(Util_MaryTTS, "Welcome to Home");
+			if(enableMaryTTS){
+				sendCommand(Util_MaryTTS, "Welcome to Home");
+			}
 			rfidCounter = 1;
 		}
 		/* else if(Living_DoorRFID.state == OFF) {
@@ -328,13 +335,24 @@ end
 // End Garden Rules --------------------------------------------------------------------------------------------
 
 
-rule "Test Mary TTS"
+//rule "Test Mary TTS"
+//	when
+//		Item TestMaryTTS changed
+//	then
+//		if(TestMaryTTS.state == ON) {
+//			sendCommand(Util_MaryTTS, "Your garden got full water")
+//		} else if(TestMaryTTS.state == OFF) {
+//			sendCommand(Util_MaryTTS, "Your garden needs water")
+//		}
+//end
+
+rule "Soil moisture got low"
 	when
-		Item TestMaryTTS changed
+		Item EnableMaryTTS changed
 	then
-		if(TestMaryTTS.state == ON) {
-			sendCommand(Util_MaryTTS, "Your garden got full water")
-		} else if(TestMaryTTS.state == OFF) {
-			sendCommand(Util_MaryTTS, "Your garden needs water")
+		if(EnableMaryTTS.state == ON) {
+			enableMaryTTS = true		
+		} else {
+			enableMaryTTS = false
 		}
 end

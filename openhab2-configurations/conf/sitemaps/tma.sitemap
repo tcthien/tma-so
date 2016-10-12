@@ -11,8 +11,6 @@ sitemap demo label="Main Menu"
 		Switch item=Bed_PIRSensor
 		Switch item=TestSoilMoisture
 	}
-	
-	*/
 	Frame label="Demo" {
 		Switch item=TestMaryTTS
 		Switch item=Env_LightStatus
@@ -21,6 +19,7 @@ sitemap demo label="Main Menu"
 		Text item=Bed_Counter
 		Text item=Rfid_Counter
 	}
+	*/
 	
 	
 	Frame label="Environment Monitor" {
@@ -42,6 +41,7 @@ sitemap demo label="Main Menu"
 		Switch item=Living_Light	label="Living Room Light"
 		Switch item=Bed_Light		label="Bed Room Light"
 		Switch item=Garage_Bell		label="Buzzer"
+		Switch item=EnableMaryTTS	label="Virtual Assistant"
 		Switch item=Control_GoOut	label="Go Out"
 	}
 }
